@@ -3,19 +3,19 @@
         <input type="text" placeholder="I need to..." v-model="newTodo" @keyup.enter="addTodo">
         <button @click="addTodo">Add</button>
         <ul>
-            <li v-for="todo in todos" :key="todo.id">
+            <li v-for="todo in todos" :key="todo.id" class="todo-lines">
                 <input type="checkbox" v-model="todo.completed">
-                {{ todo.title }}
+                <span v-if="!todo.buttonEdit" class="text-todo">{{ todo.title }}</span>
+                <input v-focus v-if="todo.buttonEdit" v-model="todo.title" @keyup.enter="update(todo)" type="text" :placeholder="todo.title">
                 <button @click="update(todo)">{{!todo.buttonEdit ? "Edit" : "Save"}}</button>
                 <button @click="del(todo)">Delete</button>
-                <input v-batata v-if="todo.buttonEdit" v-model="updatedTodo" @keyup.enter="update(todo)" type="text">
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-const batata = {
+const focus = {
     mounted: (el) => el.focus()
 }
 
@@ -26,7 +26,6 @@ export default {
             newTodo: null,
             idForTodo: 0,
             todos: [],
-            updatedTodo: null,
         }
     },
     methods: {
@@ -50,12 +49,20 @@ export default {
         },
         update(todo) {
             todo.buttonEdit = !todo.buttonEdit;
-            todo.title = this.updatedTodo;
-            this.updatedTodo = null;
         }
     },
     directives: {
-        batata
+        focus
     }
 }
 </script>
+
+<style scoped>
+    .todo-lines {
+        margin-bottom: 10px;
+    }
+
+    .text-todo {
+        margin: 0 10px;
+    }
+</style>
