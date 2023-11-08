@@ -2,7 +2,7 @@
     <div>
         <input type="text" placeholder="I need to..." v-model="newTodo" @keyup.enter="addTodo">
         <button @click="addTodo">Add</button>
-        <ul>
+        <ul class="list">
             <li v-for="todo in todos" :key="todo.id" class="todo-lines">
                 <input type="checkbox" v-model="todo.completed">
                 <span v-if="!todo.buttonEdit" class="text-todo">{{ todo.title }}</span>
@@ -58,6 +58,11 @@ export default {
 </script>
 
 <style scoped>
+
+    .list {
+        padding-left: 10px;
+    }
+
     .todo-lines {
         margin-bottom: 10px;
     }
