@@ -3,12 +3,12 @@
         <input type="text" placeholder="I need to..." v-model="newTodo" @keyup.enter="addTodo">
         <button @click="addTodo">Add</button>
         <ul class="list">
-            <li v-for="todo in todos" :key="todo.id" class="todo-lines">
-                <input type="checkbox" v-model="todo.completed">
-                <span v-if="!todo.buttonEdit" class="text-todo">{{ todo.title }}</span>
-                <input v-focus v-if="todo.buttonEdit" v-model="todo.title" @keyup.enter="update(todo)" type="text" :placeholder="todo.title">
-                <button @click="update(todo)">{{!todo.buttonEdit ? "Edit" : "Save"}}</button>
-                <button @click="del(todo)">Delete</button>
+            <li v-for="currentTodo in todos" :key="currentTodo.id" class="todo-lines">
+                <input type="checkbox" v-model="currentTodo.completed">
+                <span v-if="!currentTodo.buttonEdit" class="text-todo">{{ currentTodo.title }}</span>
+                <input v-focus v-if="currentTodo.buttonEdit" v-model="currentTodo.title" @keyup.enter="update(currentTodo)" type="text" :placeholder="currentTodo.title">
+                <button @click="update(currentTodo)">{{!currentTodo.buttonEdit ? "Edit" : "Save"}}</button>
+                <button @click="del(currentTodo)">Delete</button>
             </li>
         </ul>
     </div>
@@ -25,9 +25,10 @@ export default {
         return {
             newTodo: null,
             idForTodo: 0,
-            todos: [],
+            todos: JSON.parse(localStorage.getItem('YourItem')),
         }
     },
+    
     methods: {
         addTodo() {
             if (!this.newTodo) {
@@ -42,13 +43,18 @@ export default {
                 this.idForTodo++;
                 this.newTodo = null;
             }
+            localStorage.setItem('YourItem', JSON.stringify(this.todos))
+
         },
-        del(todo) {
-            let index = this.todos.indexOf(todo);
+        del(currentTodo) {
+            let index = this.todos.indexOf(currentTodo);
             this.todos.splice(index, 1);
+            localStorage.setItem('YourItem', JSON.stringify(this.todos))
+
         },
-        update(todo) {
-            todo.buttonEdit = !todo.buttonEdit;
+        update(currentTodo) {
+            currentTodo.buttonEdit = !currentTodo.buttonEdit;
+            localStorage.setItem('YourItem', JSON.stringify(this.todos))
         }
     },
     directives: {
