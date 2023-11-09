@@ -1,6 +1,6 @@
 <template>
   <div id="appContainer" class="container">
-    <h1>To-Do List</h1>
+    <h1 class="title">To-Do List</h1>
     <TodoList />
   </div>
 </template>
@@ -21,13 +21,28 @@ export default {
   box-sizing: border-box;
 }
 
+body {
+  background-color: #112830;
+}
+
+.title {
+  color: #112830;
+  margin: 10px 0 20px 12px;
+  font-size: 45px;
+}
+
 .container {
-  max-width: 400px;
+  width: 550px;
+  max-height: 750px;
   margin: 0 auto;
+  background-color: #14838d;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 4px 4px 1px 5px #14838d;
 }
 
 #app {
   font-family: Arial, Helvetica, sans-serif;
-  margin-top: 60px;
+  margin-top: 100px;
 }
 </style>
