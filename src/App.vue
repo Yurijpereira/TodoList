@@ -38,7 +38,6 @@ body {
   background-color: #14838d;
   padding: 15px;
   border-radius: 20px;
-  box-shadow: 4px 4px 1px 5px #14838d;
 }
 
 #app {
