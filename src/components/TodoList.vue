@@ -1,12 +1,12 @@
 <template>
     <div class="list-container">
-        <input class="main-input" type="text" placeholder="I need to..." v-model="newTodo" @keyup.enter="addTodo">
+        <input class="main-input" type="text" placeholder="I need to..." v-model="newTodo" @keyup.enter="addTodo" maxlength="">
         <button class="btns" id="btn-add" @click="addTodo">Add</button>
         <ul class="list">
             <li v-for="currentTodo in todos" :key="currentTodo.id" class="todo-lines">
-                <div>
+                <div class="checkbox-text-align">
                     <input id="btn-checked" type="checkbox" v-model="currentTodo.completed">
-                    <span v-if="!currentTodo.buttonEdit" class="text-todo" :class="{ 'completed' : currentTodo.completed}">{{ currentTodo.title }}</span>
+                    <p v-if="!currentTodo.buttonEdit" class="text-todo" :class="{ 'completed' : currentTodo.completed}">{{ currentTodo.title }}</p>
                     <input class="update-input" v-focus v-if="currentTodo.buttonEdit" v-model="currentTodo.title" @keyup.enter="update(currentTodo)" type="text" :placeholder="currentTodo.title">
                 </div>
                 <div>
@@ -28,7 +28,7 @@ export default {
     data() {
         return {
             newTodo: null,
-            idForTodo: 0,
+            idForTodo: JSON.parse(localStorage.getItem('id-items')) || 1,
             todos: JSON.parse(localStorage.getItem('todos-items')) || [],
         }
     },
@@ -44,11 +44,12 @@ export default {
                     completed: false,
                     buttonEdit: false,
                 });
+                console.log(this.todos);
                 this.idForTodo++;
                 this.newTodo = null;
             }
+            localStorage.setItem('id-items', JSON.stringify(this.idForTodo))
             localStorage.setItem('todos-items', JSON.stringify(this.todos))
-
         },
         del(currentTodo) {
             let index = this.todos.indexOf(currentTodo);
@@ -102,8 +103,18 @@ export default {
     }
 
     .text-todo {
+        display: inline-block;
+        max-width: 330px;
+        text-overflow: ellipsis;
+        overflow: hidden;
         font-size: 25px;
         margin: 0 10px;
+    }
+
+    .checkbox-text-align {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .completed {
