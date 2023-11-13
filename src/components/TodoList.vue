@@ -10,7 +10,7 @@
                     <input class="update-input" v-focus v-if="currentTodo.buttonEdit" v-model="currentTodo.title" @keyup.enter="update(currentTodo)" type="text" :placeholder="currentTodo.title">
                 </div>
                 <div>
-                    <button class="btns" id="btn-update" @click="update(currentTodo)">{{!currentTodo.buttonEdit ? "Edit" : "Save"}}</button>
+                    <button class="btns" id="btn-update" @click="update(currentTodo)">{{currentTodo.buttonEdit ? "Save" : "Edit"}}</button>
                     <button class="btns" id="btn-del" @click="del(currentTodo)">Delete</button>
                 </div>
             </li>
@@ -62,6 +62,7 @@ export default {
             localStorage.setItem('todos-items', JSON.stringify(this.todos))
         }
     },
+    
     directives: {
         focus
     }
@@ -76,7 +77,7 @@ export default {
         height: 40px;
         background-color: transparent;
         border-bottom: 2px solid #112830;
-        margin-left: 10px;
+        margin-left: 15px;
     }
 
     .main-input:focus {
@@ -92,7 +93,6 @@ export default {
         padding-left: 10px;
         list-style-type: none;
         overflow: hidden;
-        border-left: 4px dotted #112830;
         margin-top: 40px;
         max-height: 540px;
         overflow-y: scroll;
@@ -117,7 +117,9 @@ export default {
     .todo-lines {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 20px;
+        margin: 12px 0 12px 0;
+        padding-left: 12px;
+        border-left: 3px solid #112830cc;
     }
 
     .text-todo {
@@ -139,10 +141,6 @@ export default {
         text-decoration: line-through;
     }
 
-    #btn-del {
-        margin-right: 8px;
-    }
-
     #btn-add {
         margin-left: 70px;
         height: 32px;
@@ -151,7 +149,7 @@ export default {
     }
 
     #btn-update {
-        margin-right: 8px;
+        margin-right: 10px;
     }
 
     .btns {

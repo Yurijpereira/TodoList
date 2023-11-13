@@ -27,7 +27,7 @@ body {
 
 .title {
   color: #112830;
-  margin: 10px 0 20px 12px;
+  margin: 10px 0 20px 15px;
   font-size: 45px;
 }
 
@@ -36,7 +36,7 @@ body {
   max-height: 750px;
   margin: 0 auto;
   background-color: #14838d;
-  padding: 20px 10px 15px 20px;
+  padding: 20px 10px 15px 8px;
   border-radius: 20px;
 }
 
