@@ -94,6 +94,24 @@ export default {
         overflow: hidden;
         border-left: 4px dotted #112830;
         margin-top: 40px;
+        max-height: 540px;
+        overflow-y: scroll;
+    }
+
+    .list::-webkit-scrollbar-track {
+    background-color: #14838d;
+    border-radius: 40px;
+    }
+    
+    .list::-webkit-scrollbar {
+        width: 8px;
+        background: #14838d;
+        border-radius: 40px;
+    }
+
+    .list::-webkit-scrollbar-thumb {
+        border-radius: 40px;
+        background: #112830;
     }
 
     .todo-lines {
@@ -119,6 +137,10 @@ export default {
 
     .completed {
         text-decoration: line-through;
+    }
+
+    #btn-del {
+        margin-right: 8px;
     }
 
     #btn-add {
